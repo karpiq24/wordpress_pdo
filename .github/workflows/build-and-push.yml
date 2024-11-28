@@ -1,6 +1,19 @@
+name: Build and Push WordPress Image
+
+on:
+  # Trigger on push to the main branch or any pull request
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Trigger on changes to the Dockerfile or the base image
+  workflow_dispatch:
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -16,4 +29,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/wordpress_pdo:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/wordpress-pdo:latest
